@@ -1,13 +1,27 @@
 <resources>
-    <string name="app_name">Text Editor App</string>
-    <string name="codenest">CodeNest</string>
+    <!-- App Name -->
+    <string name="app_name">CodePad</string>
+    <string name="codepad">CodePad</string>
+    <string name="name">CodePad</string>
+
+
+    <!-- File Operations -->
     <string name="new_file">New File</string>
     <string name="open_file">Open File</string>
     <string name="save_file">Save File</string>
+    <string name="compile">Compile</string>
+
+    <!-- Edit Operations -->
+    <string name="cut">Cut</string>
+    <string name="copy">Copy</string>
+    <string name="paste">Paste</string>
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
-    <string name="findreplace">FindReplace</string>
+    <string name="findreplace">Find &amp; Replace</string>
+
+    <!-- Word/Character Count -->
     <string name="words_0_characters_0">Words: 0 | Characters: 0</string>
-    <string name="app_logo">App Logo</string>
-    <string name="name">CodeNest</string>
+
+    <!-- App Logo -->
+    <string name="app_logo">CodePad Logo</string>
 </resources>

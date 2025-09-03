@@ -20,16 +20,17 @@ import java.nio.charset.Charset
 import android.widget.Spinner
 import android.widget.ArrayAdapter
 import java.io.File
-import android.os.Environment
-import java.io.FileOutputStream
-import android.util.Log
+
 
 
 class EditorActivity : AppCompatActivity() {
 
     private lateinit var editor: EditText
     private lateinit var wordCountText: TextView
+    private lateinit var lineNumbers: TextView // NEW: for showing line numbers
+
     private lateinit var undoRedoManager: UndoRedoManager
+
 
     private var kotlinHighlighter: KotlinHighlighter? = null
     private var configHighlighter: ConfigurableHighlighter? = null
@@ -47,6 +48,8 @@ class EditorActivity : AppCompatActivity() {
 
         editor = findViewById(R.id.code_editor)
         wordCountText = findViewById(R.id.wordCountText)
+        lineNumbers = findViewById(R.id.lineNumbers) // NEW: initialize line numbers TextView
+
 
         // Initialize Kotlin highlighting
         kotlinHighlighter = KotlinHighlighter(editor)
@@ -55,7 +58,7 @@ class EditorActivity : AppCompatActivity() {
         // Initialize undo/redo
         undoRedoManager = UndoRedoManager(editor)
 
-        setupWordCountUpdater()
+        setupWordCountAndLinesUpdater()
         setupButtons()
     }
 
@@ -65,7 +68,7 @@ class EditorActivity : AppCompatActivity() {
         configHighlighter?.detach()
     }
 
-    private fun setupWordCountUpdater() {
+    private fun setupWordCountAndLinesUpdater() {
         editor.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // UndoRedoManager handles internally
@@ -73,15 +76,23 @@ class EditorActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val text = s?.toString() ?: ""
+
+                // Word & character count
                 val words = text.trim().split("\\s+".toRegex()).filter { it.isNotEmpty() }
                 val wordCount = words.size
                 val charCount = text.length
                 wordCountText.text = "Words: $wordCount  Characters: $charCount"
+
+                // Line numbers
+                val lines = editor.lineCount
+                val numbers = (1..lines).joinToString("\n")
+                lineNumbers.text = numbers
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
+
 
     private fun setupButtons() {
         findViewById<ImageButton>(R.id.btn_new).setOnClickListener {

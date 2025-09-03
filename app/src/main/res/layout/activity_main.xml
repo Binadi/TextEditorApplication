@@ -4,22 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#2D294B"
+    android:background="#a58312"
     android:padding="24dp">
 
+    <!-- New Logo -->
     <ImageView
         android:id="@+id/appLogo"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:src="@drawable/ic_logo"
-        android:contentDescription="@string/app_logo"
+        android:contentDescription="@string/app_name"
         android:layout_marginBottom="24dp"/>
 
+    <!-- App Name -->
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
+        android:text="@string/codepad"
         android:textSize="32sp"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
